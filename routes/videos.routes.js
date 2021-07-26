@@ -6,6 +6,7 @@ const router = Router();
 router.get('/', VideoController.getVideos);
 router.get('/:id', VideoController.getVideo);
 router.post('/', VideoController.createVideo);
+router.post('/info', VideoController.createVideoInfo);
 router.put('/', VideoController.updateVideo);
 router.delete('/:id', VideoController.deleteVideo);
 

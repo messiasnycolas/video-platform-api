@@ -1,4 +1,5 @@
-import VideoRepository from '../repositories/videos.repository.js';
+import VideoRepository from '../repositories/video.repository.js';
+import VideoInfoRepository from '../repositories/videoInfo.repository.js';
 
 // Service Layer: Business Rules 
 
@@ -17,11 +18,15 @@ async function updateVideo(video) {
 async function deleteVideo(id) {
     return await VideoRepository.deleteVideo(id);
 }
+async function createVideoInfo(info) {
+    return await VideoInfoRepository.createVideoInfo(info);
+}
 
 export default {
     getVideos,
     getVideo,
     createVideo,
     updateVideo,
-    deleteVideo
+    deleteVideo,
+    createVideoInfo
 }

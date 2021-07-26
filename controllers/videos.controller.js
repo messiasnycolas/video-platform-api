@@ -59,11 +59,24 @@ async function deleteVideo (req, res, next) {
         next(err);
     }
 }
+async function createVideoInfo (req, res ,next) {
+    try {
+        const videoInfo = req.body;
+        if (!videoInfo.videoId) {
+            throw new Error(`Video ID is a required field.`);
+        }
+        await VideoService.createVideoInfo(videoInfo);
+        res.status(200).send(`Successfully created!`);
+    } catch (err) {
+        next(err);
+    }
+}
 
 export default{
     getVideos,
     getVideo,
     createVideo,
     updateVideo,
-    deleteVideo
+    deleteVideo,
+    createVideoInfo
 }
