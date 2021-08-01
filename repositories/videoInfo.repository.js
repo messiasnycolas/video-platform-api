@@ -1,5 +1,17 @@
 import { getClient } from './mongo.db.js';
 
+async function getVideosInfo() {
+    const client = getClient();
+    try {
+        await client.connect();
+        return await client.db("video-platform").collection("video-info").find({}).toArray();
+    } catch (err) {
+        throw err;
+    } finally {
+        await client.close();
+    }
+}
+
 async function getVideoInfo(videoId) {
     const client = getClient();
     try {
@@ -41,4 +53,15 @@ async function updateVideoInfo(videoInfo) {
     }
 }
 
-export default { getVideoInfo, createVideoInfo, updateVideoInfo }
+async function deleteVideoInfo(videoId) {
+    const client = getClient();
+    try {
+        await client.connect();
+        return await client.db("video-platform").collection("video-info").deleteOne({videoId: videoId});
+    } catch (err) {
+        throw err;
+    } finally {
+        await client.close();
+    }
+}
+export default { getVideosInfo, getVideoInfo, createVideoInfo, updateVideoInfo, deleteVideoInfo };

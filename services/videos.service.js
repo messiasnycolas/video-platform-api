@@ -19,7 +19,11 @@ async function updateVideo(video) {
     return await VideoRepository.updateVideo(video);
 }
 async function deleteVideo(id) {
+    await VideoInfoRepository.deleteVideoInfo(parseInt(id));
     return await VideoRepository.deleteVideo(id);
+}
+async function getVideosInfo() {
+    return await VideoInfoRepository.getVideosInfo();
 }
 async function createVideoInfo(videoInfo) {
     return await VideoInfoRepository.createVideoInfo(videoInfo);
@@ -34,6 +38,7 @@ export default {
     createVideo,
     updateVideo,
     deleteVideo,
+    getVideosInfo,
     createVideoInfo,
     updateVideoInfo
 }
