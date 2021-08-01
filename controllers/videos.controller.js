@@ -59,6 +59,13 @@ async function deleteVideo (req, res, next) {
         next(err);
     }
 }
+async function getVideoInfo (req, res, next) {
+    try {
+        res.status(200).send(await VideoService.getVideoInfo(req.params.id));
+    } catch (err) {
+        next(err);
+    }
+}
 async function getVideosInfo (req, res, next) {
     try {
         res.status(200).send(await VideoService.getVideosInfo());
@@ -66,7 +73,6 @@ async function getVideosInfo (req, res, next) {
         next(err);
     }
 }
-
 async function createVideoInfo (req, res ,next) {
     try {
         const videoInfo = req.body;
@@ -99,6 +105,7 @@ export default{
     updateVideo,
     deleteVideo,
     getVideosInfo,
+    getVideoInfo,
     createVideoInfo,
     updateVideoInfo
 }

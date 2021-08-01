@@ -3,13 +3,14 @@ import VideoController from '../controllers/videos.controller.js';
 
 const router = Router();
 
-router.get('/', VideoController.getVideos);
 router.get('/info', VideoController.getVideosInfo);
+router.get('/info/:id', VideoController.getVideoInfo);
+router.get('/', VideoController.getVideos);
 router.get('/:id', VideoController.getVideo);
-router.post('/', VideoController.createVideo);
 router.post('/info', VideoController.createVideoInfo);
-router.put('/', VideoController.updateVideo);
+router.post('/', VideoController.createVideo);
 router.put('/info', VideoController.updateVideoInfo);
+router.put('/', VideoController.updateVideo);
 router.delete('/:id', VideoController.deleteVideo);
 
 export default router;

@@ -1,67 +1,57 @@
-import { getClient } from './mongo.db.js';
+import { connect } from './mongo.db.js';
+import { VideoInfoSchema } from '../schemas/videoInfo.schema.js';
+
+
 
 async function getVideosInfo() {
-    const client = getClient();
     try {
-        await client.connect();
-        return await client.db("video-platform").collection("video-info").find({}).toArray();
+        const mongoose = await connect();
+        const VideoInfo = mongoose.model("video-platform", VideoInfoSchema, "video-info");
+        return await VideoInfo.find({}).exec(); 
     } catch (err) {
         throw err;
-    } finally {
-        await client.close();
     }
 }
 
 async function getVideoInfo(videoId) {
-    const client = getClient();
     try {
-        await client.connect();
-        return await client.db("video-platform").collection("video-info").findOne({videoId: videoId});
+        const mongoose = await connect();
+        const VideoInfo = mongoose.model("VideoInfo", VideoInfoSchema);
+        return await VideoInfo.findOne({ videoId }).exec();
     } catch (err) {
         throw err;
-    } finally {
-        await client.close();
     }
 }
 
 async function createVideoInfo(videoInfo) {
-    const client = getClient();
     try {
-        await client.connect();
-        await client.db("video-platform").collection("video-info").insertOne(videoInfo);
+        const mongoose = await connect();
+        const VideoInfo = mongoose.model("VideoInfo", VideoInfoSchema);
+        const video = new VideoInfo(videoInfo);
+        await video.save();
     } catch (err) {
         throw err;
-    } finally {
-        await client.close();
     }
 }
 
 async function updateVideoInfo(videoInfo) {
-    const client = getClient();
     try {
-        await client.connect();
-        await client.db("video-platform")
-        .collection("video-info")
-        .updateOne(
-            {videoId: videoInfo.videoId},
-            {$set: {...videoInfo}}
-        );
+        const mongoose = await connect();
+        const VideoInfo = mongoose.model("videoInfo", VideoInfoSchema);
+        await VideoInfo.findOneAndUpdate({ videoId: videoInfo.videoId }, videoInfo);
     } catch (err) {
         throw err;
-    } finally {
-        await client.close();
     }
 }
 
 async function deleteVideoInfo(videoId) {
-    const client = getClient();
     try {
-        await client.connect();
-        return await client.db("video-platform").collection("video-info").deleteOne({videoId: videoId});
+        const mongoose = await connect();
+        const VideoInfo = mongoose.model("videoInfo", VideoInfoSchema);
+        await VideoInfo.deleteOne({ videoId });
     } catch (err) {
         throw err;
-    } finally {
-        await client.close();
     }
 }
+
 export default { getVideosInfo, getVideoInfo, createVideoInfo, updateVideoInfo, deleteVideoInfo };

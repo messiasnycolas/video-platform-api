@@ -1,6 +1,10 @@
-import mongodb from "mongodb";
+import mongoose from 'mongoose';
 import { mongoConnString } from "../config.js";
-function getClient () {
-    return new mongodb.MongoClient(mongoConnString);
-} 
-export { getClient }
+
+async function connect() {
+    return await mongoose.connect(
+        mongoConnString, 
+        { useNewUrlParser: true, useUnifiedTopology: true });
+}
+
+export { connect };
