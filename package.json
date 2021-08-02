@@ -24,7 +24,8 @@
     "mongodb": "^4.0.1",
     "mongoose": "^5.13.5",
     "pg": "^8.6.0",
-    "sequelize": "^6.6.5"
+    "sequelize": "^6.6.5",
+    "winston": "^3.3.3"
   },
   "type": "module"
 }
