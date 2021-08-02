@@ -5,6 +5,6 @@ const app = express();
 global.port = 3000;
 app.use(express.json());
 app.use('/', VideoRouter);
-app.listen(port, () => {
-    console.log(`Server up! Listening on port ${port}`)
+app.listen(global.port, () => {
+	console.log(`Server up! Listening on port ${global.port}`);
 });

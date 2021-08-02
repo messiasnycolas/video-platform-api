@@ -1,48 +1,58 @@
 import VideoRepository from '../repositories/video.repository.js';
 import VideoInfoRepository from '../repositories/videoInfo.repository.js';
 
-// Service Layer: Business Rules 
+// Service Layer: Business Rules
 
-async function getVideos() {
-    return await VideoRepository.getVideos();
+function getVideos() {
+	return VideoRepository.getVideos();
 }
+
 async function getVideo(id) {
-    const video = await VideoRepository.getVideo(id);
-    if (video)
-    video.info = await VideoInfoRepository.getVideoInfo(parseInt(id));
-    return video;
+	const video = await VideoRepository.getVideo(id);
+	if (video) {
+		video.info = await VideoInfoRepository.getVideoInfo(parseInt(id));
+	}
+
+	return video;
 }
-async function createVideo(video) {
-    return await VideoRepository.insertVideo(video);
+
+function createVideo(video) {
+	return VideoRepository.insertVideo(video);
 }
-async function updateVideo(video) {
-    return await VideoRepository.updateVideo(video);
+
+function updateVideo(video) {
+	return VideoRepository.updateVideo(video);
 }
+
 async function deleteVideo(id) {
-    await VideoInfoRepository.deleteVideoInfo(parseInt(id));
-    return await VideoRepository.deleteVideo(id);
+	await VideoInfoRepository.deleteVideoInfo(parseInt(id));
+	return VideoRepository.deleteVideo(id);
 }
-async function getVideoInfo(id) {
-    return await VideoInfoRepository.getVideoInfo(id);
+
+function getVideoInfo(id) {
+	return VideoInfoRepository.getVideoInfo(id);
 }
-async function getVideosInfo() {
-    return await VideoInfoRepository.getVideosInfo();
+
+function getVideosInfo() {
+	return VideoInfoRepository.getVideosInfo();
 }
-async function createVideoInfo(videoInfo) {
-    return await VideoInfoRepository.createVideoInfo(videoInfo);
+
+function createVideoInfo(videoInfo) {
+	return VideoInfoRepository.createVideoInfo(videoInfo);
 }
-async function updateVideoInfo(videoInfo) {
-    return await VideoInfoRepository.updateVideoInfo(videoInfo);
+
+function updateVideoInfo(videoInfo) {
+	return VideoInfoRepository.updateVideoInfo(videoInfo);
 }
 
 export default {
-    getVideos,
-    getVideo,
-    createVideo,
-    updateVideo,
-    deleteVideo,
-    getVideosInfo,
-    getVideoInfo,
-    createVideoInfo,
-    updateVideoInfo
-}
+	getVideos,
+	getVideo,
+	createVideo,
+	updateVideo,
+	deleteVideo,
+	getVideosInfo,
+	getVideoInfo,
+	createVideoInfo,
+	updateVideoInfo,
+};

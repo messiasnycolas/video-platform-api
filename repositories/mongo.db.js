@@ -1,10 +1,10 @@
 import mongoose from 'mongoose';
-import { mongoConnString } from "../config.js";
+import {mongoConnString} from '../config.js';
 
-async function connect() {
-    return await mongoose.connect(
-        mongoConnString, 
-        { useNewUrlParser: true, useUnifiedTopology: true });
+function connect() {
+	return mongoose.connect(
+		mongoConnString,
+		{useNewUrlParser: true, useUnifiedTopology: true});
 }
 
-export { connect };
+export {connect};
